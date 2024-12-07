@@ -1,91 +1,69 @@
-<%@ page import="modelo.Cliente"%>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html>
+<%@ page import="modelo.Cliente" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Clientes</title>
     <style>
-        /* Agrega tu estilo aquí */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 20px 0;
+            text-align: center;
+        }
+        a {
+            font-size: 18px;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Gestión de Clientes</h1>
-
-        <!-- Mensaje de éxito o error -->
-        <% 
-            String successMessage = (String) request.getAttribute("successMessage");
-            String errorMessage = (String) request.getAttribute("errorMessage");
-            if (successMessage != null) { 
-        %>
-        <div class="message success">
-            <%= successMessage %>
-        </div>
-        <% } %>
-        
-        <% if (errorMessage != null) { %>
-        <div class="message error">
-            <%= errorMessage %>
-        </div>
-        <% } %>
-
-        <!-- Formulario para registrar un cliente -->
-        <form action="ClienteServlet" method="post">
-            <h3>Registrar Cliente</h3>
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required />
-
-            <label for="correo">Correo Electrónico</label>
-            <input type="email" id="correo" name="correo" required />
-
-            <label for="telefono">Teléfono</label>
-            <input type="text" id="telefono" name="telefono" required />
-
-            <label for="direccion">Dirección</label>
-            <input type="text" id="direccion" name="direccion" required />
-
-            <input type="submit" value="Registrar Cliente" />
-        </form>
-
-        <!-- Lista de Clientes -->
-        <h3>Clientes Registrados</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% 
-                    List <Cliente> clientes = (List<Cliente>) request.getAttribute("cliente");
-                    if (clientes != null && !clientes.isEmpty()) {
-                        for (Cliente cliente : clientes) {
-                %>
-                <tr>
-                    <td><%= cliente.getId() %></td>
-                    <td><%= cliente.getNombre() %></td>
-                    <td><%= cliente.getCorreo() %></td>
-                    <td><%= cliente.getTelefono() %></td>
-                    <td><%= cliente.getDireccion() %></td>
-                    <td>
-                        <a class="action-btn" href="ActualizarCliente?id=<%= cliente.getId() %>">Actualizar</a>
-                        <a class="action-btn" href="EliminarCliente?id=<%= cliente.getId() %>">Eliminar</a>
-                    </td>
-                </tr>
-                <% 
-                        }
-                    } else {
-                %>
-                <tr>
-                    <td colspan="6" style="text-align: center;">No hay clientes registrados.</td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
+        <ul>
+            <li>
+                <a href="registroCliente.jsp">Registrar Cliente</a>
+            </li>
+            <li>
+                <a href="actualizarCliente.jsp">Actualizar Datos del Cliente</a>
+            </li>
+            <li>
+                <a href="eliminarCliente.jsp">Eliminar Cliente</a>
+            </li>
+             <li>
+                <a href="listacliente.jsp">Clientes Registrados</a>
+            </li>
+        </ul>
     </div>
 </body>
 </html>

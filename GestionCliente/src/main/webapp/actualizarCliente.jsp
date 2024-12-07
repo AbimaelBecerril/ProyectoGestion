@@ -1,23 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <title>Actualizar Cliente</title>
+    <meta charset="UTF-8">
+    <title>Actualizar Cliente</title>
 </head>
 <body>
-    <h1>Actualizar Cliente</h1>
-    <form action="ClienteServlet" method="post">
-        <input type="hidden" name="accion" value="actualizar"/>
-        <input type="hidden" name="index" value="${param.index}"/>
-        Nombre: <input type="text" name="nombre" value="${cliente.nombre}"/><br/>
-        Correo: <input type="text" name="correo" value="${cliente.correo}"/><br/>
-        Teléfono: <input type="text" name="telefono" value="${cliente.telefono}"/><br/>
-        Dirección: <input type="text" name="direccion" value="${cliente.direccion}"/><br/>
-        <input type="submit" value="Actualizar"/>
+    <h2>Actualizar Datos de Cliente</h2>
+    <form action="actualizarCliente.jsp" method="post">
+        <label for="id">ID Cliente:</label><br>
+        <input type="text" id="id" name="id" required><br><br>
+
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="telefono">Teléfono:</label><br>
+        <input type="text" id="telefono" name="telefono"><br><br>
+        
+        <label for="direccion">Direccion:</label><br>
+        <input type="text" id="direccion" name="telefono"><br><br>
+
+        <input type="submit" value="Actualizar Cliente">
+        <li>
+                <a href="index.jsp">Pagina de Inicio</a>
+          </li>
     </form>
-    <br/>
-    <a href="index.jsp">Volver</a>
 </body>
 </html>

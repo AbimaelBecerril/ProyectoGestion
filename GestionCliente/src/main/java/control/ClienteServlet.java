@@ -30,18 +30,18 @@ public class ClienteServlet extends HttpServlet {
         clienteDAO = new ClienteDAO();
     }
         
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		List<Cliente> clientes = clienteDAO.obtenerClientes();
+		List<Cliente> clientes = null;
+		clientes = clienteDAO.obtenerClientes();
         request.setAttribute("clientes", clientes);
 
         // Enviar la lista de clientes a la JSP
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("registroCliente.jsp");
         dispatcher.forward(request, response);
 	}
 
@@ -60,6 +60,6 @@ public class ClienteServlet extends HttpServlet {
 
 	        Cliente cliente = new Cliente(0, nombre, correo, telefono, direccion);
 	        ClienteDAO.registrarCliente(cliente);
-	        response.sendRedirect("index.jsp");
+	        response.sendRedirect("registroCliente.jsp");
 	}
 }
