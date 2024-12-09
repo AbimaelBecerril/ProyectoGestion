@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.sql.*, DataBase.Conexion" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,28 +19,28 @@
     </form>
 
     <% 
-        // Verificamos si es un post (es decir, si el formulario fue enviado)
+        // Verificamos si es un POST (es decir, si el formulario fue enviado)
         if (request.getMethod().equalsIgnoreCase("POST")) {
             // Obtención de los datos del formulario
             String nombre = request.getParameter("nombre");
             String correo = request.getParameter("correo");
             String telefono = request.getParameter("telefono");
             String direccion = request.getParameter("direccion");
-            
-            // Establecer conexión a la base de datos
-            String url = "jdbc:mysql://localhost:3306/clientesdb";  // Cambia por tu URL
-            String user = "admin";  // Cambia por tu usuario
-            String password = "admin";  // Cambia por tu contraseña
 
+            // Usamos la clase Conexion para obtener la conexión a la base de datos
             Connection conn = null;
             PreparedStatement stmt = null;
 
             try {
-                // Cargar el driver JDBC
-                Class.forName("com.mysql.cj.jdbc.Driver");
+                // Crear una instancia de Conexion y obtener la conexión
+                Conexion conexion = new Conexion(); // Asegúrate de usar el nombre correcto
+                conn = conexion.conectar(); // Método estático o de instancia según la clase Conexion
 
-                // Establecer la conexión
-                conn = DriverManager.getConnection(url, user, password);
+                // Verificar si la conexión es válida
+                if (conn == null) {
+                    out.println("<p>Error: No se pudo establecer la conexión a la base de datos.</p>");
+                    return; // Detenemos la ejecución si no hay conexión
+                }
 
                 // Crear la consulta SQL para insertar el cliente
                 String sql = "INSERT INTO clientes (nombre, correo, telefono, direccion) VALUES (?, ?, ?, ?)";
